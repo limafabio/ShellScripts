@@ -9,7 +9,7 @@
 #Description:
 # Show logins and names of the user from system
 # Get information from /etc/passwd
-#	Support to options -h,-V and missing parameters
+#	Support to options -h,-V,-s and missing parameters
 #-----------------------------------
 #
 #Example:
@@ -19,7 +19,7 @@
 #
 #History
 #
-# Version 4.0 2016/09/08, FabioLima
+# Version 5.0 2016/09/08, FabioLima
 #
 #-----------------------------------
 #
@@ -28,12 +28,20 @@
 
 MESSAGE_USE="
 Use: $(basename "$0") [-h | -V]
+	-s,--sort		Sort in alphabetic order the users list 
 	-h,--help		Show the windown and close
 	-V, --version		Show the version and close
 "
 
+order=0
+
 # options command line
 case "$1" in
+
+	-s | --sort)
+			order=1
+	;;
+
 	-h | --help)
 		echo "$MESSAGE_USE"
 		exit 0
@@ -55,5 +63,14 @@ case "$1" in
 
 esac
 
-#process
-cut -d : -f 1,5 /etc/passwd | tr : \\t
+#extract list
+list=$(cut -d : -f 1,5 /etc/passwd)
+
+#order list
+if test "$order" = 1
+then
+	list=$(echo "$list" | sort)
+fi
+
+#show the results
+echo "$list" | tr : \\t
