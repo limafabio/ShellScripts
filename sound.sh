@@ -15,6 +15,7 @@
 #Example:
 # ./sound.sh
 #
+#To stop must press Ctr+C
 #-----------------------------------
 #
 #History
