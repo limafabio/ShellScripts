@@ -31,9 +31,13 @@ Debug(){
 	[ $1 -le $DEBUG ] && echo "--- DEBUG $*" 
 }
 
-echo -ne "\033[11;900]"
-while :
-do
-	echo -ne "\033[10;500]\a" ; sleep 1
-	echo -ne "\033[10;400]\a" ; sleep 1
+echo -e '\033[10;750]\033[11;100]'
+
+freq=0
+while :; do
+	freq=$((freq+1))
+	echo -e "\033[10;$freq]"
+	echo -e "frequence=$freq"
+	echo -e '\a'
+	sleep 10
 done
