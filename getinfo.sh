@@ -36,11 +36,10 @@ hash lynx 2>/dev/null || {
 	echo >&2 "It's require lynx but it's not installed. Aborting."; exit 1;
 }
 
-lynx -dump -nolist "$URL" |
-	grep '^[A-Z]' |
-	grep '^[^Visite ]'|
-	grep '^[^O que é Linux]'|
-	grep '^[^BR\-Linux\.org]' |
+lynx -source "$URL" |
+	grep '^<div class=userpostbody>' |
+  sed '
+			s/<[^>]*>//g' |
 	head -n 10
 
 
