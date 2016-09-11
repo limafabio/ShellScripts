@@ -38,6 +38,9 @@ hash lynx 2>/dev/null || {
 
 lynx -dump -nolist "$URL" |
 	grep '^[A-Z]' |
+	grep '^[^Visite ]'|
+	grep '^[^O que é Linux]'|
+	grep '^[^BR\-Linux\.org]' |
 	head -n 10
 
 
