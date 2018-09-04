@@ -1,4 +1,4 @@
-#!/usr/bin
+#!/bin/sh
 #solved by FabioLima
 #
 #NameScript:	getinfo.sh
